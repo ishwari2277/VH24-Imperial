@@ -21,8 +21,8 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
     },
+    userDetails: { type: mongoose.Schema.Types.ObjectId, ref: 'UserDetails' } // Reference to UserDetails
 });
-
 
 userSchema.plugin(plm);
 
