@@ -8,11 +8,9 @@ const UserDetails = require('./userdetails');
 
 
 const localStrategy = require("passport-local");
-const { path } = require('../app');
 passport.use(new localStrategy(userModel.authenticate()));
 
-/* GET home page. */
-// Route to render the home page
+
 router.get("/", (req, res) => {
   const successMessage = req.session.successMessage;
   const errorMessage = req.session.errorMessage;
@@ -20,7 +18,6 @@ router.get("/", (req, res) => {
   delete req.session.successMessage;
   delete req.session.errorMessage;
 
-  // Pass the authenticated user (if any) to the template
   res.render("index", {
     successMessage,
     errorMessage,
@@ -155,10 +152,6 @@ router.post('/userdetails', async (req, res) => {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 // Dashboard Profile
-
-// GET route for the user profile
-// Assuming you have express-session or similar middleware to manage sessions
-// Assuming you're using Express Router
 router.get('/dashboard-profile', async (req, res) => {
   try {
       const userId = req.user._id; // Get the logged-in user's ID
@@ -176,9 +169,6 @@ router.get('/dashboard-profile', async (req, res) => {
       res.status(500).send('Server Error');
   }
 });
-
-
-
 
 router.post('/dashboard-profile/update', async (req, res) => {
   try {
@@ -203,7 +193,25 @@ router.post('/dashboard-profile/update', async (req, res) => {
       res.status(500).send('Server Error');
   }
 });
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Dashboard BLOG
+router.get('/dashboard-blog', async (req, res) => {
+  try {
+      const userId = req.user._id; // Get the logged-in user's ID
+      const userDetails = await UserDetails.findOne({ userId });
 
+      // Check if userDetails is found
+      if (!userDetails) {
+          return res.render('dashboard/dashboard-profile', { userdetails: userDetails || null, path: '/dashboard-profile' });
+      }
+
+      // Render the dashboard profile view, passing the userDetails
+      res.render('dashboard/dashboard-blog', { userdetails: userDetails, path: '/dashboard-blog' });
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Server Error');
+  }
+});
 
 
 
