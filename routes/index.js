@@ -106,9 +106,46 @@ function isLoggedIn(req, res, next) {
 }
 /////////////////////////////////////////////////////////////////////////
 
-router.get('/dashboard', isLoggedIn, function (req, res, next) {
-  res.render('dashboard/dashboard', { path: '/dashboard' });
+router.get('/dashboard', isLoggedIn, async function (req, res, next) {
+  try {
+    const userId = req.user._id; // Assuming the logged-in user ID is stored in req.user
+    const userDetails = await UserDetails.findOne({ userId });
+
+    // If user details are not found, you might want to handle that accordingly
+    if (!userDetails) {
+      return res.render('dashboard/dashboard', { path: '/dashboard', insights: null });
+    }
+
+    // Prepare data for insights
+    const salary = userDetails.salary || 0;
+    const medicalExpenses = userDetails.medicalExpenses || 0;
+    const loanEMI = userDetails.loanEmi || 0;
+    const lifestyleExpenses = userDetails.lifestyleExpenses || 0;
+    const savings = userDetails.savings || 0;
+
+    // Calculate total expenses and savings distribution
+    const investment = savings * 0.8; // 80% for investments
+    const emergency = savings * 0.2; // 20% for emergencies
+
+    // Pass insights to the template
+    res.render('dashboard/dashboard', {
+      path: '/dashboard',
+      userdetails: userDetails,
+      insights: {
+        salary,
+        medicalExpenses,
+        loanEMI,
+        lifestyleExpenses,
+        investment,
+        emergency,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
+  }
 });
+
 
 /////////////////////////////////////////////////////////////////////////
 // USER INPUT SECION 

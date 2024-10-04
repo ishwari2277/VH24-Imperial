@@ -11,6 +11,8 @@
   <link href="/stylesheets/style.css" rel="stylesheet">
   <link href="/stylesheets/responsive.css" rel="stylesheet">
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
   <!-- Responsive -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -151,20 +153,101 @@
                 <!-- Financial Charts Widget -->
                 <div class="applicants-widget ls-widget">
                   <div class="widget-title">
-                    <h4>Your Financial Overview</h4>
+                    <h3 style="margin-top: 20px;">Your Financial Overview</h3>
                   </div>
                   <div class="widget-content">
                     <div class="row">
                       <div class="col-lg-12">
                         <!-- Results section for displaying pie and doughnut charts -->
-                        <div id="result" style="display: none; margin-top: 20px;">
-                          <h2>Results</h2>
-                          <div class="charts-container"
-                            style="background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
-                            <canvas id="financialChart"></canvas>
-                            <canvas id="doughnutChart" style="margin-top: 20px;"></canvas>
-                          </div>
-                        </div>
+                        <div id="result">
+                              <div class="charts-container" style="background-color: white; padding: 10px; border-radius: 8px; display: flex; align-items: center; width: 50%;">
+                                  <canvas id="financialChart" width="250" height="250" style="margin-bottom: 2px;"></canvas> <!-- Further reduced width and height -->
+                                  <canvas id="doughnutChart" width="250" height="250" style="margin-top: 0;"></canvas> <!-- Further reduced width and height -->
+                              </div>
+                      </div>
+
+
+
+                      
+                      <script>
+                          // JavaScript to render charts
+                          const salary = <%= insights.salary %>;
+                          const medicalExpenses = <%= insights.medicalExpenses %>;
+                          const loanEMI = <%= insights.loanEMI %>;
+                          const lifestyleExpenses = <%= insights.lifestyleExpenses %>;
+                          const investment = <%= insights.investment %>;
+                          const emergency = <%= insights.emergency %>;
+                      
+                          // Data for the pie chart
+                          const pieData = {
+                              labels: [
+                                  'Medical Expenses',
+                                  'Loan EMI',
+                                  'Lifestyle Expenses',
+                                  'Investment Savings',
+                                  'Emergency Savings'
+                              ],
+                              datasets: [{
+                                  label: 'Financial Breakdown',
+                                  data: [medicalExpenses, loanEMI, lifestyleExpenses, investment, emergency],
+                                  backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
+                                  hoverOffset: 4
+                              }]
+                          };
+                      
+                          // Data for the doughnut chart
+                          const doughnutData = {
+                              labels: [
+                                  'Investment Savings',
+                                  'Emergency Savings'
+                              ],
+                              datasets: [{
+                                  label: 'Savings Distribution',
+                                  data: [investment, emergency],
+                                  backgroundColor: ['#4BC0C0', '#9966FF'],
+                                  hoverOffset: 4
+                              }]
+                          };
+                      
+                          // Render pie chart
+                          const pieCtx = document.getElementById('financialChart').getContext('2d');
+                          const financialChart = new Chart(pieCtx, {
+                              type: 'pie',
+                              data: pieData,
+                              options: {
+                                  responsive: true,
+                                  plugins: {
+                                      legend: {
+                                          position: 'top',
+                                      },
+                                      title: {
+                                          display: true,
+                                          text: 'Your Financial Breakdown'
+                                      }
+                                  }
+                              }
+                          });
+                      
+                          // Render doughnut chart
+                          const doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
+                          const doughnutChart = new Chart(doughnutCtx, {
+                              type: 'doughnut',
+                              data: doughnutData,
+                              options: {
+                                  responsive: true,
+                                  plugins: {
+                                      legend: {
+                                          position: 'top',
+                                      },
+                                      title: {
+                                          display: true,
+                                          text: 'Your Savings Distribution'
+                                      }
+                                  }
+                              }
+                          });
+                      </script>
+                      
                       </div>
 
                       <!-- Your existing candidate blocks can be kept here if needed -->
@@ -172,121 +255,6 @@
                   </div>
                 </div>
               </div>
-
-              <script>
-                // Function to calculate savings and update charts
-                function calculateSavings() {
-                  const salary = parseFloat(document.getElementById('salary').value);
-                  const medicalExpenses = parseFloat(document.getElementById('medicalExpenses').value);
-                  const loanEMI = parseFloat(document.getElementById('loanEMI').value);
-                  const lifestyleExpenses = parseFloat(document.getElementById('lifestyleExpenses').value);
-
-                  const totalExpenses = medicalExpenses + loanEMI + lifestyleExpenses;
-
-                  // Validate that total expenses do not exceed salary
-                  if (totalExpenses > salary) {
-                    alert("The total expenses cannot exceed your salary.");
-                    return; // Stop the submission
-                  }
-
-                  // Calculate savings
-                  const savings = salary - totalExpenses;
-                  document.getElementById('savings').value = savings.toFixed(2);
-                }
-
-                // Event listeners to update savings on input
-                document.getElementById('salary').addEventListener('input', calculateSavings);
-                document.getElementById('medicalExpenses').addEventListener('input', calculateSavings);
-                document.getElementById('loanEMI').addEventListener('input', calculateSavings);
-                document.getElementById('lifestyleExpenses').addEventListener('input', calculateSavings);
-
-                // JavaScript to handle form submission and display charts
-                document.getElementById('investmentForm').onsubmit = function (event) {
-                  event.preventDefault();
-
-                  const salary = parseFloat(document.getElementById('salary').value);
-                  const medicalExpenses = parseFloat(document.getElementById('medicalExpenses').value);
-                  const loanEMI = parseFloat(document.getElementById('loanEMI').value);
-                  const lifestyleExpenses = parseFloat(document.getElementById('lifestyleExpenses').value);
-                  const savings = parseFloat(document.getElementById('savings').value);
-
-                  // Calculate total expenses and savings distribution
-                  const investment = savings * 0.8; // 80% for investments
-                  const emergency = savings * 0.2; // 20% for emergencies
-
-                  // Data for the pie chart
-                  const pieData = {
-                    labels: [
-                      'Medical Expenses',
-                      'Loan EMI',
-                      'Lifestyle Expenses',
-                      'Investment Savings',
-                      'Emergency Savings'
-                    ],
-                    datasets: [{
-                      label: 'Financial Breakdown',
-                      data: [medicalExpenses, loanEMI, lifestyleExpenses, investment, emergency],
-                      backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
-                      hoverOffset: 4
-                    }]
-                  };
-
-                  // Data for the doughnut chart
-                  const doughnutData = {
-                    labels: [
-                      'Investment Savings',
-                      'Emergency Savings'
-                    ],
-                    datasets: [{
-                      label: 'Savings Distribution',
-                      data: [investment, emergency],
-                      backgroundColor: ['#4BC0C0', '#9966FF'],
-                      hoverOffset: 4
-                    }]
-                  };
-
-                  // Display result section and hide the form
-                  document.getElementById('result').style.display = 'block';
-
-                  // Render pie chart
-                  const pieCtx = document.getElementById('financialChart').getContext('2d');
-                  new Chart(pieCtx, {
-                    type: 'pie',
-                    data: pieData,
-                    options: {
-                      responsive: true,
-                      plugins: {
-                        legend: {
-                          position: 'top',
-                        },
-                        title: {
-                          display: true,
-                          text: 'Your Financial Breakdown'
-                        }
-                      }
-                    }
-                  });
-
-                  // Render doughnut chart
-                  const doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
-                  new Chart(doughnutCtx, {
-                    type: 'doughnut',
-                    data: doughnutData,
-                    options: {
-                      responsive: true,
-                      plugins: {
-                        legend: {
-                          position: 'top',
-                        },
-                        title: {
-                          display: true,
-                          text: 'Your Savings Distribution'
-                        }
-                      }
-                    }
-                  });
-                };
-              </script>
 
             </div>
           </div>
