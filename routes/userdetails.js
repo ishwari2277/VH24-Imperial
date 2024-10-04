@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
 
-const userDetailsSchema = new mongoose.Schema({
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // Reference to User model
+const UserDetailsSchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        unique: true, // Ensure one detail record per user
+        required: true,
+    },
     name: { type: String, required: true },
     education: { type: String, required: true },
     salary: { type: Number, required: true },
@@ -13,7 +18,8 @@ const userDetailsSchema = new mongoose.Schema({
     familyMembers: { type: Number, required: true },
     otherExpenses: { type: String, required: true },
     riskTolerance: { type: String, required: true },
-    goal: { type: String, required: true },
+    goal: { type: String, required: true }
 });
 
-module.exports = mongoose.model('UserDetails', userDetailsSchema);
+const UserDetails = mongoose.model('UserDetails', UserDetailsSchema);
+module.exports = UserDetails;

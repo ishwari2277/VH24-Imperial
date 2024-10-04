@@ -27,6 +27,20 @@ router.get("/", (req, res) => {
     user: req.user // `req.user` contains the authenticated user object if logged in
   });
 });
+router.get("/test", (req, res) => {
+  const successMessage = req.session.successMessage;
+  const errorMessage = req.session.errorMessage;
+
+  delete req.session.successMessage;
+  delete req.session.errorMessage;
+
+  // Pass the authenticated user (if any) to the template
+  res.render("index2", {
+    successMessage,
+    errorMessage,
+    user: req.user // `req.user` contains the authenticated user object if logged in
+  });
+});
 
 
 router.get('/login', function (req, res, next) {
@@ -144,28 +158,31 @@ router.post('/userdetails', async (req, res) => {
 
 // GET route for the user profile
 // Assuming you have express-session or similar middleware to manage sessions
+// Assuming you're using Express Router
 router.get('/dashboard-profile', async (req, res) => {
   try {
-      const userId = req.user._id; // Assuming the logged-in user ID is stored in req.user
-      const userdetails = await UserDetails.findOne({ userId }); // Find the user details by user ID
-      
-      // Render the profile page with user details
-      res.render('dashboard/dashboard-profile', { userdetails, path:'dashboard/dashboard-profile' });
+      const userId = req.user._id; // Get the logged-in user's ID
+      const userDetails = await UserDetails.findOne({ userId });
+
+      // Check if userDetails is found
+      if (!userDetails) {
+          return res.render('dashboard/dashboard-profile', { userdetails: userDetails || null, path: '/dashboard-profile' });
+      }
+
+      // Render the dashboard profile view, passing the userDetails
+      res.render('dashboard/dashboard-profile', { userdetails: userDetails, path: '/dashboard-profile' });
   } catch (error) {
       console.error(error);
       res.status(500).send('Server Error');
   }
 });
 
-// POST route to update user details
+
+
+
 router.post('/dashboard-profile/update', async (req, res) => {
   try {
-      // Ensure user is logged in
-      if (!req.user) {
-          return res.status(401).send('User not authenticated'); // Handle unauthenticated user
-      }
-
-      const userId = req.user._id; // Get the logged-in user's ID
+      const userId = req.user._id; // Assuming the logged-in user ID is stored in req.user
 
       // Check if user details already exist
       let userDetails = await UserDetails.findOne({ userId });
@@ -180,7 +197,7 @@ router.post('/dashboard-profile/update', async (req, res) => {
       }
 
       // Redirect to profile page after updating/creating
-      res.redirect('/dashboard/dashboard-profile'); // Correct usage of res.redirect
+      res.render('dashboard/dashboard-profile', { userdetails: userDetails, path: '/dashboard-profile' });
   } catch (error) {
       console.error(error);
       res.status(500).send('Server Error');
