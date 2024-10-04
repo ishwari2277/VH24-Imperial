@@ -9,16 +9,15 @@ const UserDetailsSchema = new mongoose.Schema({
     },
     name: { type: String, required: true },
     education: { type: String, required: true },
-    salary: { type: Number, required: true },
+    salary: { type: Number, required: true }, // Salary in ₹
     age: { type: Number, required: true },
-    medicalEmergencies: { type: String, required: true },
-    medicalAllotments: { type: String, required: true },
+    medicalAllotments: { type: Number, required: true }, // Number of medical allotments
+    medicalExpenses: { type: Number, required: true }, // Total medical expenses in ₹
+    loanEmi: { type: Number, required: true }, // Loan EMI in ₹
+    lifestyleExpenses: { type: Number, required: true }, // Lifestyle expenses in ₹
+    savings: { type: Number, required: true }, // Savings in ₹
     workSector: { type: String, required: true },
-    jobSecurity: { type: String, required: true },
-    familyMembers: { type: Number, required: true },
-    otherExpenses: { type: String, required: true },
-    riskTolerance: { type: String, required: true },
-    goal: { type: String, required: true }
+    riskTolerance: { type: String, required: true } // Risk tolerance
 });
 
 const UserDetails = mongoose.model('UserDetails', UserDetailsSchema);

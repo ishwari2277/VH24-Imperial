@@ -154,45 +154,95 @@ router.post('/userdetails', async (req, res) => {
 // Dashboard Profile
 router.get('/dashboard-profile', async (req, res) => {
   try {
-      const userId = req.user._id; // Get the logged-in user's ID
-      const userDetails = await UserDetails.findOne({ userId });
+    const userId = req.user._id; // Get the logged-in user's ID
+    const userDetails = await UserDetails.findOne({ userId });
 
-      // Check if userDetails is found
-      if (!userDetails) {
-          return res.render('dashboard/dashboard-profile', { userdetails: userDetails || null, path: '/dashboard-profile' });
-      }
-
-      // Render the dashboard profile view, passing the userDetails
-      res.render('dashboard/dashboard-profile', { userdetails: userDetails, path: '/dashboard-profile' });
+    // Render the dashboard profile view, passing the userDetails
+    res.render('dashboard/dashboard-profile', { userdetails: userDetails || null, path: '/dashboard-profile' });
   } catch (error) {
-      console.error(error);
-      res.status(500).send('Server Error');
+    console.error(error);
+    res.status(500).send('Server Error');
   }
 });
+
 
 router.post('/dashboard-profile/update', async (req, res) => {
   try {
-      const userId = req.user._id; // Assuming the logged-in user ID is stored in req.user
+    const userId = req.user._id; // Assuming the logged-in user ID is stored in req.user
 
-      // Check if user details already exist
-      let userDetails = await UserDetails.findOne({ userId });
+    // Destructure the fields from the request body to ensure only valid fields are updated
+    const {
+      name,
+      education,
+      salary,
+      age,
+      medicalAllotments,
+      medicalExpenses,
+      loanEmi,
+      lifestyleExpenses,
+      savings,
+      workSector,
+      riskTolerance
+    } = req.body;
 
-      if (userDetails) {
-          // Update existing user details
-          userDetails = await UserDetails.findByIdAndUpdate(userDetails._id, req.body, { new: true });
-      } else {
-          // Create new user details
-          userDetails = new UserDetails({ userId, ...req.body });
-          await userDetails.save();
-      }
+    // Validate the required fields (you can add more validation if needed)
+    if (!name || !education || !salary || !age) {
+      return res.status(400).send('Missing required fields');
+    }
 
-      // Redirect to profile page after updating/creating
-      res.render('dashboard/dashboard-profile', { userdetails: userDetails, path: '/dashboard-profile' });
+    // Check if user details already exist
+    let userDetails = await UserDetails.findOne({ userId });
+
+    if (userDetails) {
+      // Update existing user details
+      userDetails = await UserDetails.findByIdAndUpdate(
+        userDetails._id,
+        {
+          name,
+          education,
+          salary,
+          age,
+          medicalAllotments,
+          medicalExpenses,
+          loanEmi,
+          lifestyleExpenses,
+          savings,
+          workSector,
+          riskTolerance
+        },
+        { new: true }
+      );
+    } else {
+      // Create new user details
+      userDetails = new UserDetails({
+        userId,
+        name,
+        education,
+        salary,
+        age,
+        medicalAllotments,
+        medicalExpenses,
+        loanEmi,
+        lifestyleExpenses,
+        savings,
+        workSector,
+        riskTolerance
+      });
+      await userDetails.save();
+    }
+
+    // Redirect to profile page after updating/creating
+    res.render('dashboard/dashboard-profile', { userdetails: userDetails, path: '/dashboard-profile' });
   } catch (error) {
-      console.error(error);
-      res.status(500).send('Server Error');
+    // Log detailed error message and stack trace
+    console.error('Error updating user details:', error.message, error.stack);
+
+    // Send generic error message to the client
+    res.status(500).send('Server Error');
   }
 });
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Dashboard BLOG
 router.get('/dashboard-blog', async (req, res) => {
