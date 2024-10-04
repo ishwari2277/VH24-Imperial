@@ -300,8 +300,8 @@ router.get('/dashboard-blog', async (req, res) => {
   }
 });
 
-
-
-
+router.get('/testing', function (req, res, next) {
+  res.render('testing');
+});
 
 module.exports = router;
