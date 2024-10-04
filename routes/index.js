@@ -282,18 +282,10 @@ router.post('/dashboard-profile/update', async (req, res) => {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Dashboard BLOG
-router.get('/dashboard-blog', async (req, res) => {
+router.get('/dashboard-community', async (req, res) => {
   try {
-      const userId = req.user._id; // Get the logged-in user's ID
-      const userDetails = await UserDetails.findOne({ userId });
-
-      // Check if userDetails is found
-      if (!userDetails) {
-          return res.render('dashboard/dashboard-profile', { userdetails: userDetails || null, path: '/dashboard-profile' });
-      }
-
       // Render the dashboard profile view, passing the userDetails
-      res.render('dashboard/dashboard-blog', { userdetails: userDetails, path: '/dashboard-blog' });
+      res.render('https://localhost:3002', {path: '/dashboard-community' });
   } catch (error) {
       console.error(error);
       res.status(500).send('Server Error');
