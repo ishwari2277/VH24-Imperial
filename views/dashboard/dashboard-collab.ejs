@@ -67,11 +67,11 @@
                 <!-- End User Sidebar -->
 
                 <!-- Results section for displaying pie and doughnut charts -->
-                
+
                 <section class="user-dashboard">
                     <div class="dashboard-outer">
                         <div class="upper-title-box">
-                            <h3>Your Profile!</h3>
+                            <h3>Collaborate with people!</h3>
                             <div class="text">Ready to jump back in?</div>
                         </div>
 
@@ -81,13 +81,14 @@
                                 <div class="ls-widget">
                                     <div class="tabs-box">
                                         <div class="widget-title">
-                                            <h4>My Profile</h4>
+                                            <h4>Collab</h4>
                                         </div>
 
                                         <div class="widget-content">
 
                                             <div class="widget-content">
-                                                <form class="default-form" action="/dashboard-collab/update" method="post">
+                                                <form class="default-form" action="/dashboard-collab/update"
+                                                    method="post">
                                                     <div class="row">
                                                         <!-- Full Name -->
                                                         <div class="form-group col-lg-6 col-md-12">
@@ -96,23 +97,24 @@
                                                                 value="<%= userdetails?.fullName || '' %>"
                                                                 placeholder="John Doe" required>
                                                         </div>
-                                                
+
                                                         <!-- Relationship to User -->
                                                         <div class="form-group col-lg-6 col-md-12">
                                                             <label for="relationshipToUser">Relationship to User</label>
-                                                            <input id="relationshipToUser" name="relationshipToUser" type="text"
+                                                            <input id="relationshipToUser" name="relationshipToUser"
+                                                                type="text"
                                                                 value="<%= userdetails?.relationshipToUser || '' %>"
                                                                 placeholder="Spouse" required>
                                                         </div>
-                                                
+
                                                         <!-- Age -->
                                                         <div class="form-group col-lg-6 col-md-12">
                                                             <label for="age">Age</label>
                                                             <input id="age" name="age" type="number"
-                                                                value="<%= userdetails?.age || '' %>"
-                                                                placeholder="30" required>
+                                                                value="<%= userdetails?.age || '' %>" placeholder="30"
+                                                                required>
                                                         </div>
-                                                
+
                                                         <!-- Occupation (Optional) -->
                                                         <div class="form-group col-lg-6 col-md-12">
                                                             <label for="occupation">Occupation (Optional)</label>
@@ -120,7 +122,7 @@
                                                                 value="<%= userdetails?.occupation || '' %>"
                                                                 placeholder="Engineer">
                                                         </div>
-                                                
+
                                                         <!-- Annual Income -->
                                                         <div class="form-group col-lg-6 col-md-12">
                                                             <label for="annualIncome">Annual Income (₹)</label>
@@ -128,61 +130,76 @@
                                                                 value="<%= userdetails?.annualIncome || '' %>"
                                                                 placeholder="500000" required>
                                                         </div>
-                                                
+
                                                         <!-- Total Medical Expenses -->
                                                         <div class="form-group col-lg-6 col-md-12">
-                                                            <label for="medicalExpenses">Total Medical Expenses (₹)</label>
-                                                            <input id="medicalExpenses" name="medicalExpenses" type="number"
+                                                            <label for="medicalExpenses">Total Medical Expenses
+                                                                (₹)</label>
+                                                            <input id="medicalExpenses" name="medicalExpenses"
+                                                                type="number"
                                                                 value="<%= userdetails?.medicalExpenses || '' %>"
                                                                 placeholder="5000" required>
                                                         </div>
-                                                
+
                                                         <!-- Lifestyle Expenses -->
                                                         <div class="form-group col-lg-6 col-md-12">
-                                                            <label for="lifestyleExpenses">Lifestyle Expenses (₹)</label>
-                                                            <input id="lifestyleExpenses" name="lifestyleExpenses" type="number"
+                                                            <label for="lifestyleExpenses">Lifestyle Expenses
+                                                                (₹)</label>
+                                                            <input id="lifestyleExpenses" name="lifestyleExpenses"
+                                                                type="number"
                                                                 value="<%= userdetails?.lifestyleExpenses || '' %>"
                                                                 placeholder="10000" required>
                                                         </div>
-                                                
+
                                                         <!-- Risk Profiling -->
                                                         <div class="form-group col-lg-6 col-md-12">
                                                             <label for="riskProfiling">Risk Profiling</label>
                                                             <select id="riskProfiling" name="riskProfiling" required>
-                                                                <option value="Conservative" <%= userdetails?.riskProfiling === 'Conservative' ? 'selected' : '' %>>Conservative</option>
-                                                                <option value="Moderate" <%= userdetails?.riskProfiling === 'Moderate' ? 'selected' : '' %>>Moderate</option>
-                                                                <option value="Aggressive" <%= userdetails?.riskProfiling === 'Aggressive' ? 'selected' : '' %>>Aggressive</option>
+                                                                <option value="Conservative"
+                                                                    <%=userdetails?.riskProfiling==='Conservative'
+                                                                    ? 'selected' : '' %>>Conservative</option>
+                                                                <option value="Moderate"
+                                                                    <%=userdetails?.riskProfiling==='Moderate'
+                                                                    ? 'selected' : '' %>>Moderate</option>
+                                                                <option value="Aggressive"
+                                                                    <%=userdetails?.riskProfiling==='Aggressive'
+                                                                    ? 'selected' : '' %>>Aggressive</option>
                                                             </select>
                                                         </div>
-                                                
+
                                                         <!-- Investment Goals (Optional) -->
                                                         <div class="form-group col-lg-6 col-md-12">
-                                                            <label for="investmentGoals">Investment Goals (Optional)</label>
-                                                            <input id="investmentGoals" name="investmentGoals" type="text"
+                                                            <label for="investmentGoals">Investment Goals
+                                                                (Optional)</label>
+                                                            <input id="investmentGoals" name="investmentGoals"
+                                                                type="text"
                                                                 value="<%= userdetails?.investmentGoals || '' %>"
                                                                 placeholder="Retirement, Education, etc.">
                                                         </div>
-                                                
+
                                                         <!-- Current Investments (Optional) -->
                                                         <div class="form-group col-lg-6 col-md-12">
-                                                            <label for="currentInvestments">Current Investments (Optional)</label>
-                                                            <input id="currentInvestments" name="currentInvestments" type="text"
+                                                            <label for="currentInvestments">Current Investments
+                                                                (Optional)</label>
+                                                            <input id="currentInvestments" name="currentInvestments"
+                                                                type="text"
                                                                 value="<%= userdetails?.currentInvestments || '' %>"
                                                                 placeholder="Stocks, Bonds, etc.">
                                                         </div>
-                                                
+
                                                         <!-- Submit Buttons -->
                                                         <div class="form-group col-lg-12 col-md-12">
-                                                            <button type="submit" class="theme-btn btn-style-one">Update Profile</button>
+                                                            <button type="submit" class="theme-btn btn-style-one">Update
+                                                                Profile</button>
                                                         </div>
                                                     </div>
                                                 </form>
-                                                
-                                                
-                                                
-                                                
 
-                                               
+
+
+
+
+
 
 
 
@@ -214,76 +231,64 @@
         if (annyang) {
             // Commands for voice input
             const commands = {
-                // Write name
-                'enter name *tag': function (variable) {
-                    let name = document.getElementById("name");
-                    name.value = variable;
-                    speak('Now enter your education');
+                // Write Full Name
+                'enter full name *tag': function (variable) {
+                    let fullName = document.getElementById("fullName");
+                    fullName.value = variable;
+                    speak('Now enter the relationship to user');
                 },
-                // Write education
-                'enter education *tag': function (variable) {
-                    let education = document.getElementById("education");
-                    education.value = variable;
-                    speak('Now enter your salary');
-                },
-                // Write salary
-                'enter salary *tag': function (variable) {
-                    let salary = document.getElementById("salary");
-                    salary.value = variable;
+                // Write Relationship to User
+                'enter relationship to user *tag': function (variable) {
+                    let relationshipToUser = document.getElementById("relationshipToUser");
+                    relationshipToUser.value = variable;
                     speak('Now enter your age');
                 },
-                // Write age
+                // Write Age
                 'enter age *tag': function (variable) {
                     let age = document.getElementById("age");
                     age.value = variable;
-                    speak('Now enter the number of medical allotments');
+                    speak('Now enter your occupation');
                 },
-                // Write number of medical allotments
-                'enter number of medical allotments *tag': function (variable) {
-                    let medicalAllotments = document.getElementById("medical-allotments");
-                    medicalAllotments.value = variable;
-                    speak('Now enter the total medical expenses');
+                // Write Occupation
+                'enter occupation *tag': function (variable) {
+                    let occupation = document.getElementById("occupation");
+                    occupation.value = variable;
+                    speak('Now enter your annual income');
                 },
-                // Write total medical expenses
+                // Write Annual Income
+                'enter annual income *tag': function (variable) {
+                    let annualIncome = document.getElementById("annualIncome");
+                    annualIncome.value = variable;
+                    speak('Now enter your total medical expenses');
+                },
+                // Write Total Medical Expenses
                 'enter total medical expenses *tag': function (variable) {
-                    let medicalExpenses = document.getElementById("medical-expenses");
+                    let medicalExpenses = document.getElementById("medicalExpenses");
                     medicalExpenses.value = variable;
-                    speak('Now enter your loan EMI');
-                },
-                // Write loan EMI
-                'enter loan EMI *tag': function (variable) {
-                    let loanEmi = document.getElementById("loan-emi");
-                    loanEmi.value = variable;
                     speak('Now enter your lifestyle expenses');
                 },
-                // Write lifestyle expenses
+                // Write Lifestyle Expenses
                 'enter lifestyle expenses *tag': function (variable) {
-                    let lifestyleExpenses = document.getElementById("lifestyle-expenses");
+                    let lifestyleExpenses = document.getElementById("lifestyleExpenses");
                     lifestyleExpenses.value = variable;
-                    speak('Now enter your savings');
+                    speak('Now select your risk profiling');
                 },
-                // Write savings
-                'enter savings *tag': function (variable) {
-                    let savings = document.getElementById("savings");
-                    savings.value = variable;
-                    speak('Now enter your work sector');
+                // Select Risk Profiling
+                'select risk profiling *tag': function (variable) {
+                    let riskProfiling = document.getElementById("riskProfiling");
+                    riskProfiling.value = variable.charAt(0).toUpperCase() + variable.slice(1).toLowerCase(); // Capitalize first letter
+                    speak('Now enter your investment goals');
                 },
-                // Write work sector
-                'enter work sector *tag': function (variable) {
-                    let workSector = document.getElementById("work-sector");
-                    workSector.value = variable;
-                    speak('Now enter your risk tolerance');
+                // Write Investment Goals
+                'enter investment goals *tag': function (variable) {
+                    let investmentGoals = document.getElementById("investmentGoals");
+                    investmentGoals.value = variable;
+                    speak('Now enter your current investments');
                 },
-                // Select risk tolerance
-                'select risk tolerance *tag': function (variable) {
-                    let riskTolerance = document.getElementById("risk-tolerance");
-                    riskTolerance.value = variable;
-                    speak('Now enter your goal');
-                },
-                // Write goal
-                'enter goal *tag': function (variable) {
-                    let goal = document.getElementById("goal");
-                    goal.value = variable;
+                // Write Current Investments
+                'enter current investments *tag': function (variable) {
+                    let currentInvestments = document.getElementById("currentInvestments");
+                    currentInvestments.value = variable;
                     speak('Form complete. You can now submit.');
                 },
             };
@@ -303,7 +308,7 @@
             // Speak on page load
             function onPageLoadSpeak() {
                 setTimeout(() => {
-                    speak('Please enter your name');
+                    speak('Please enter your full name');
                 }, 1000);
             }
 
@@ -314,6 +319,7 @@
             console.log('Annyang is not supported in this browser.');
         }
     </script>
+
 
 
 

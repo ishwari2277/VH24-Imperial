@@ -293,6 +293,9 @@ router.get('/dashboard-community', async (req, res) => {
   }
 });
 
+router.get('/dashboard-predict', function (req, res, next) {
+  res.render('dashboard/dashboard-predict',{path:'dashboard/dashboard-predict'});
+});
 router.get('/testingb', function (req, res, next) {
   res.render('testingb');
 });
