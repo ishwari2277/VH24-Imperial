@@ -12,6 +12,113 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #2b6777;
+            color: #fff;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 2rem;
+            margin-top: -50px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            color: #2b6777;
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            background-color: #2b6777;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+            font-size: 0.9rem;
+        }
+
+        @media screen and (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .card h2 {
+                font-size: 1.3rem;
+            }
+
+            .content {
+                padding: 1rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .card h2 {
+                font-size: 1.2rem;
+            }
+
+            .content {
+                padding: 0.5rem;
+            }
+
+            footer {
+                font-size: 0.8rem;
+            }
+        }
+
         @font-face {
             font-family: 'Archivo';
             font-style: normal;
@@ -777,17 +884,14 @@
                         <div class="elementor-element elementor-element-2a34854 elementor-widget elementor-widget-rt-site-logo"
                             data-id="2a34854" data-element_type="widget" data-widget_type="rt-site-logo.default">
                             <div class="elementor-widget-container">
-                                <div class="site-branding light"> <span class="site-title"> <a
-                                            href="/images/logoo.png" rel="home"
-                                            aria-label="site logo" class="has-mobile-logo"> <img width="149" height="40"
-                                                src="/images/logoo.png"
-                                                class="rt-site-logo dark-logo" alt="" decoding="async" /><img
-                                                width="149" height="40"
-                                                src="/images/logoo.png"
-                                                class="rt-site-logo light-logo" alt="" decoding="async" /><img
-                                                loading="lazy" width="149" height="40"
-                                                src="/images/logoo.png"
-                                                class="rt-mobile-logo" alt="" decoding="async" /> </a> </span></div>
+                                <div class="site-branding light"> <span class="site-title"> <a href="/images/logoo.png"
+                                            rel="home" aria-label="site logo" class="has-mobile-logo"> <img width="149"
+                                                height="40" src="/images/logoo.png" class="rt-site-logo dark-logo"
+                                                alt="" decoding="async" /><img width="149" height="40"
+                                                src="/images/logoo.png" class="rt-site-logo light-logo" alt=""
+                                                decoding="async" /><img loading="lazy" width="149" height="40"
+                                                src="/images/logoo.png" class="rt-mobile-logo" alt=""
+                                                decoding="async" /> </a> </span></div>
                             </div>
                         </div>
                         <div class="elementor-element elementor-element-d2e9c7e elementor-hidden-tablet elementor-hidden-mobile elementor-widget elementor-widget-rt-site-menu"
@@ -798,8 +902,7 @@
                                         <ul id="menu-main-menu" class="finwave-navbar">
                                             <li id="menu-item-112"
                                                 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children dropdown active menu-item-112">
-                                                <a href="/"
-                                                    class="dropdown-toggle" data-toggle="dropdown">Home</a>
+                                                <a href="/" class="dropdown-toggle" data-toggle="dropdown">Home</a>
                                             </li>
                                             <li id="menu-item-54"
                                                 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown menu-item-54">
@@ -1723,49 +1826,58 @@
                 </p>
 
                 <div class="flex justify-center mt-8">
-                    <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-19 md:grid-cols-2 xl:grid-cols-2 w-full max-w-5xl">
+                    <div
+                        class="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-19 md:grid-cols-2 xl:grid-cols-2 w-full max-w-5xl">
                         <div class="p-8 space-y-3 border-2 border-green-400 dark:border-green-300 rounded-xl">
                             <span class="inline-block text-green-500 dark:text-green-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
                                 </svg>
                             </span>
-                
-                            <h1 class="text-xl font-semibold text-gray-800 capitalize dark:text-black">Beginner's Quiz</h1>
-                
+
+                            <h1 class="text-xl font-semibold text-gray-800 capitalize dark:text-black">Beginner's Quiz
+                            </h1>
+
                             <p class="text-gray-800 dark:text-gray-800">
-                                Test your understanding of basic financial concepts like budgeting, saving, and interest rates.
+                                Test your understanding of basic financial concepts like budgeting, saving, and interest
+                                rates.
                             </p>
-                
+
                             <a href="/testingb"
                                 class="inline-flex p-2 text-green-500 capitalize transition-colors duration-300 transform bg-green-100 rounded-full rtl:-scale-x-100 dark:bg-green-500 dark:text-black hover:underline hover:text-green-600 dark:hover:text-green-500">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             </a>
                         </div>
-                
+
                         <div class="p-8 space-y-3 border-2 border-green-400 dark:border-green-300 rounded-xl">
                             <span class="inline-block text-green-500 dark:text-green-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                                 </svg>
                             </span>
-                
-                            <h1 class="text-xl font-semibold text-gray-800 capitalize dark:text-black">Advanced Investor Quiz</h1>
-                
+
+                            <h1 class="text-xl font-semibold text-gray-800 capitalize dark:text-black">Advanced Investor
+                                Quiz</h1>
+
                             <p class="text-gray-800 dark:text-gray-800">
-                                Ready to dive deeper? Test your knowledge on advanced investing strategies and market trends.
+                                Ready to dive deeper? Test your knowledge on advanced investing strategies and market
+                                trends.
                             </p>
-                
+
                             <a href="/testinga"
                                 class="inline-flex p-2 text-green-500 capitalize transition-colors duration-300 transform bg-green-100 rounded-full rtl:-scale-x-100 dark:bg-green-500 dark:text-black hover:underline hover:text-green-600 dark:hover:text-green-500">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
@@ -1773,10 +1885,43 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </section><!-- #content -->
-        
+
+        <section class="content">
+            <div class="card">
+                <h2>Interactive Investment Dashboard</h2>
+                <p>Track your portfolio, analyze trends, and make informed decisions with real-time data visualization.
+                </p>
+            </div>
+
+            <div class="card">
+                <h2>Personalized Financial Goals Tracker</h2>
+                <p>Set financial goals and monitor your progress with personalized insights and automated reminders.</p>
+            </div>
+
+            <div class="card">
+                <h2>AI Chatbot for Financial Queries</h2>
+                <p>Get 24/7 assistance and personalized recommendations from our AI-powered financial chatbot.</p>
+            </div>
+
+            <div class="card">
+                <h2>Investment Risk Simulation Tool</h2>
+                <p>Simulate market scenarios and assess how they impact your portfolio, helping you make better
+                    decisions.</p>
+            </div>
+
+            <div class="card">
+                <h2>Socially Responsible Investing Filters</h2>
+                <p>Align your investments with ethical values using filters for environmental, social, and governance
+                    criteria.</p>
+            </div>
+
+            <!-- Add more cards for other features -->
+        </section>
+
+
         <footer class="site-footer finwave-footer-builder" role="contentinfo">
             <div data-elementor-type="wp-post" data-elementor-id="8451" class="elementor elementor-8451">
 
@@ -2046,7 +2191,7 @@
         /* ]]> */</script>
     <script defer
         src="https://www.radiustheme.com/demo/wordpress/themes/finwave/wp-content/uploads/siteground-optimizer-assets/siteground-optimizer-combined-js-b1dfc6deb8cc486475370d85c0fa9317.js"></script>
-        <script src="https://cdn.botpress.cloud/webchat/v0/inject.js"></script>
+    <script src="https://cdn.botpress.cloud/webchat/v0/inject.js"></script>
     <script src="https://mediafiles.botpress.cloud/95f4a0a5-b3c3-40d3-bbd4-74ce46bfb347/webchat/config.js"
         defer></script>
 </body>
