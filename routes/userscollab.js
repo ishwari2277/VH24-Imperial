@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const userCollabSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'UserDetails', // Reference to the User model
+        ref: 'User', // Reference to the User model
         unique:true,
         required: true
     },

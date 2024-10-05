@@ -305,8 +305,76 @@ router.get('/pages', function (req, res, next) {
 router.get('/faq', function (req, res, next) {
   res.render('faq');
 });
-router.get('/dashboard-collab', function (req, res, next) {
-  res.render('dashboard/dashboard-collab',{path:"dashboard-collab"});
+router.get('/dashboard-collab', async (req, res) => {
+  try {
+      // Ensure user is logged in
+      if (!req.user || !req.user._id) {
+          return res.redirect('/login'); // Redirect to login if not authenticated
+      }
+      
+      const userId = req.user._id; // Get the logged-in user's ID
+      const userCollab = await UserCollab.findOne({ userId });
+
+      // Render the dashboard profile view, passing the userCollab
+      res.render('dashboard/dashboard-collab', { userdetails: userCollab || null, path: '/dashboard-collab' });
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Server Error');
+  }
+});
+
+router.post('/dashboard-collab/update', async (req, res) => {
+  try {
+      // Ensure user is logged in
+      if (!req.user || !req.user._id) {
+          return res.redirect('/login'); // Redirect to login if not authenticated
+      }
+      
+      const userId = req.user._id; // Get the logged-in user's ID
+      const { fullName, relationshipToUser, age, occupation, annualIncome, medicalExpenses, lifestyleExpenses, riskProfiling, investmentGoals, currentInvestments } = req.body;
+
+      // Check if collaboration details already exist for the user
+      let userCollab = await UserCollab.findOne({ userId });
+
+      if (userCollab) {
+          // Update existing collaboration details
+          userCollab.fullName = fullName;
+          userCollab.relationshipToUser = relationshipToUser;
+          userCollab.age = age;
+          userCollab.occupation = occupation;
+          userCollab.annualIncome = annualIncome;
+          userCollab.medicalExpenses = medicalExpenses;
+          userCollab.lifestyleExpenses = lifestyleExpenses;
+          userCollab.riskProfiling = riskProfiling;
+          userCollab.investmentGoals = investmentGoals;
+          userCollab.currentInvestments = currentInvestments;
+
+          await userCollab.save();
+      } else {
+          // Create new collaboration details
+          userCollab = new UserCollab({
+              userId,
+              fullName,
+              relationshipToUser,
+              age,
+              occupation,
+              annualIncome,
+              medicalExpenses,
+              lifestyleExpenses,
+              riskProfiling,
+              investmentGoals,
+              currentInvestments
+          });
+
+          await userCollab.save();
+      }
+
+      // Redirect or respond after successful update/create
+      res.redirect('/dashboard-collab'); // Redirect back to the dashboard-collab page
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Server Error');
+  }
 });
 
 

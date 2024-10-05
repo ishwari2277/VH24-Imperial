@@ -171,12 +171,12 @@
                       
                       <script>
                           // JavaScript to render charts
-                          const salary = <%= insights.salary %>;
-                          const medicalExpenses = <%= insights.medicalExpenses %>;
-                          const loanEMI = <%= insights.loanEMI %>;
-                          const lifestyleExpenses = <%= insights.lifestyleExpenses %>;
-                          const investment = <%= insights.investment %>;
-                          const emergency = <%= insights.emergency %>;
+                          const salary = <%= insights?.salary %>;
+                          const medicalExpenses = <%= insights?.medicalExpenses %>;
+                          const loanEMI = <%= insights?.loanEMI %>;
+                          const lifestyleExpenses = <%= insights?.lifestyleExpenses %>;
+                          const investment = <%= insights?.investment %>;
+                          const emergency = <%= insights?.emergency %>;
                       
                           // Data for the pie chart
                           const pieData = {
