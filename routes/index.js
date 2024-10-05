@@ -5,6 +5,7 @@ const passport = require('passport');
 
 const userModel = require('./users');
 const UserDetails = require('./userdetails');
+const UserCollab = require('./userscollab')
 
 
 const localStrategy = require("passport-local");
@@ -301,5 +302,13 @@ router.get('/testinga', function (req, res, next) {
 router.get('/pages', function (req, res, next) {
   res.render('pages');
 });
+router.get('/faq', function (req, res, next) {
+  res.render('faq');
+});
+router.get('/dashboard-collab', function (req, res, next) {
+  res.render('dashboard/dashboard-collab',{path:"dashboard-collab"});
+});
+
+
 
 module.exports = router;
