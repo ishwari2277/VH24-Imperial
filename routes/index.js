@@ -285,15 +285,21 @@ router.post('/dashboard-profile/update', async (req, res) => {
 router.get('/dashboard-community', async (req, res) => {
   try {
       // Render the dashboard profile view, passing the userDetails
-      res.render('https://localhost:3002', {path: '/dashboard-community' });
+      res.render('dashboard/dashboard-community', { path: '/dashboard-community' });
   } catch (error) {
       console.error(error);
       res.status(500).send('Server Error');
   }
 });
 
-router.get('/testing', function (req, res, next) {
-  res.render('testing');
+router.get('/testingb', function (req, res, next) {
+  res.render('testingb');
+});
+router.get('/testinga', function (req, res, next) {
+  res.render('testinga');
+});
+router.get('/pages', function (req, res, next) {
+  res.render('pages');
 });
 
 module.exports = router;

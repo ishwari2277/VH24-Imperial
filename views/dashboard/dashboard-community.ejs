@@ -38,6 +38,12 @@
             object-fit: cover;
             margin-top: 10px;
         }
+
+        iframe {
+            width: 100%;
+            height: 120vh; /* Full viewport height */
+            border: none; /* Remove default border */
+        }
     </style>
 </head>
 
@@ -67,112 +73,14 @@
                 <section class="user-dashboard">
                     <div class="dashboard-outer">
                         <div class="upper-title-box">
-                            <h3>Your Profile!</h3>
+                            <h3>Communities!</h3>
                             <div class="text">Ready to jump back in?</div>
                         </div>
 
                         <div class="row">
                             <div class="col-lg-12">
                                 <!-- Ls widget -->
-                                <div class="ls-widget">
-                                    <div class="tabs-box">
-                                        <div class="widget-title">
-                                            <h4>My Profile</h4>
-                                        </div>
-
-                                        <div class="widget-content">
-
-                                            <div class="widget-content">
-                                                <form class="default-form" action="/dashboard-profile/update" method="post">
-                                                    <div class="row">
-                                                        <div class="form-group col-lg-6 col-md-12">
-                                                            <label for="name">Name</label>
-                                                            <input id="name" name="name" type="text" 
-                                                                   value="<%= userdetails ? userdetails.name : '' %>" 
-                                                                   placeholder="John Doe" required>
-                                                        </div>
-                                                        <div class="form-group col-lg-6 col-md-12">
-                                                            <label for="education">Education</label>
-                                                            <input id="education" name="education" type="text" 
-                                                                   value="<%= userdetails ? userdetails.education : '' %>" 
-                                                                   placeholder="Bachelor's Degree" required>
-                                                        </div>
-                                                        <div class="form-group col-lg-6 col-md-12">
-                                                            <label for="salary">Salary</label>
-                                                            <input id="salary" name="salary" type="number" 
-                                                                   value="<%= userdetails ? userdetails.salary : '' %>" 
-                                                                   placeholder="50000" required>
-                                                        </div>
-                                                        <div class="form-group col-lg-6 col-md-12">
-                                                            <label for="age">Age</label>
-                                                            <input id="age" name="age" type="number" 
-                                                                   value="<%= userdetails ? userdetails.age : '' %>" 
-                                                                   placeholder="30" required>
-                                                        </div>
-                                                        <div class="form-group col-lg-6 col-md-12">
-                                                            <label for="medical-emergencies">Medical Emergencies</label>
-                                                            <input id="medical-emergencies" name="medicalEmergencies" type="text" 
-                                                                   value="<%= userdetails ? userdetails.medicalEmergencies : '' %>" 
-                                                                   placeholder="Diabetes" required>
-                                                        </div>
-                                                        <div class="form-group col-lg-6 col-md-12">
-                                                            <label for="medical-allotments">Medical Allotments</label>
-                                                            <input id="medical-allotments" name="medicalAllotments" type="text" 
-                                                                   value="<%= userdetails ? userdetails.medicalAllotments : '' %>" 
-                                                                   placeholder="Allergy Medication" required>
-                                                        </div>
-                                                        <div class="form-group col-lg-6 col-md-12">
-                                                            <label for="work-sector">Work Sector</label>
-                                                            <input id="work-sector" name="workSector" type="text" 
-                                                                   value="<%= userdetails ? userdetails.workSector : '' %>" 
-                                                                   placeholder="IT" required>
-                                                        </div>
-                                                        <div class="form-group col-lg-6 col-md-12">
-                                                            <label for="job-security">Job Security</label>
-                                                            <input id="job-security" name="jobSecurity" type="text" 
-                                                                   value="<%= userdetails ? userdetails.jobSecurity : '' %>" 
-                                                                   placeholder="Stable" required>
-                                                        </div>
-                                                        <div class="form-group col-lg-6 col-md-12">
-                                                            <label for="family-members">Family Members</label>
-                                                            <input id="family-members" name="familyMembers" type="number" 
-                                                                   value="<%= userdetails ? userdetails.familyMembers : '' %>" 
-                                                                   placeholder="3" required>
-                                                        </div>
-                                                        <div class="form-group col-lg-6 col-md-12">
-                                                            <label for="other-expenses">Other Expenses</label>
-                                                            <input id="other-expenses" name="otherExpenses" type="text" 
-                                                                   value="<%= userdetails ? userdetails.otherExpenses : '' %>" 
-                                                                   placeholder="Rent, etc." required>
-                                                        </div>
-                                                        <div class="form-group col-lg-6 col-md-12">
-                                                            <label for="risk-tolerance">Risk Tolerance</label>
-                                                            <select id="risk-tolerance" name="riskTolerance" required>
-                                                                <option value="aggressive" <%= userdetails && userdetails.riskTolerance === 'aggressive' ? 'selected' : '' %>>Aggressive</option>
-                                                                <option value="balanced" <%= userdetails && userdetails.riskTolerance === 'balanced' ? 'selected' : '' %>>Balanced</option>
-                                                                <option value="conservative" <%= userdetails && userdetails.riskTolerance === 'conservative' ? 'selected' : '' %>>Conservative</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group col-lg-6 col-md-12">
-                                                            <label for="goal">Goal</label>
-                                                            <input id="goal" name="goal" type="text" 
-                                                                   value="<%= userdetails ? userdetails.goal : '' %>" 
-                                                                   placeholder="Retirement" required>
-                                                        </div>
-                                                        <div class="form-group col-lg-12 col-md-12">
-                                                            <button type="submit" class="theme-btn btn-style-one">Update Profile</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                                
-                                                
-                                                
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
+                                <iframe src="http://localhost:3002/"></iframe>
 
                             </div>
                 </section>
