@@ -4,7 +4,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 
-app = Flask(_name_)
+app = Flask(__name__)
 
 # Load and clean the stock dataset
 def load_stock_model():
@@ -209,5 +209,5 @@ def predict():
 
     return jsonify(investment_results)
 
-if __name__ == '_main_':
+if __name__ == '__main__':
     app.run(debug=True)
